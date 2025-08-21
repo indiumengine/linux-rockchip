@@ -117,13 +117,6 @@
 /*       hdmi display        */
 &hdmi {
    status = "okay";
-   rockchip,phy-table =
-		<92812500  0x8009 0x0000 0x0270>,
-		<165000000 0x800b 0x0000 0x026d>,
-		<185625000 0x800b 0x0000 0x01ed>,
-		<297000000 0x800b 0x0000 0x01ad>,
-		<594000000 0x8029 0x0000 0x0088>,
-		<000000000 0x0000 0x0000 0x0000>;
 };
 
 &hdmi_in_vp0 {
@@ -157,7 +150,7 @@
 };
 
 &edp_phy{
-	states = "okay";
+	status = "okay";
 };
 
 &route_edp {
@@ -399,7 +392,7 @@
 &pcie3x2 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pcie30x2m1_pins>;
-	//reset-gpios = <&gpio2 RK_PD6 GPIO_ACTIVE_LOW>;
+	reset-gpios = <&gpio2 RK_PD6 GPIO_ACTIVE_HIGH>;
 	//reset-gpios = <&gpio2 RK_PD7 GPIO_ACTIVE_LOW>;	//for test
 	vpcie3v3-supply = <&vcc3v3_sys>;
 	status = "okay";
@@ -637,7 +630,7 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&pcie20m1_pins>;
 	num-viewport = <4>;
-	reset-gpios = <&gpio3 RK_PC1 GPIO_ACTIVE_LOW>;
+	reset-gpios = <&gpio3 RK_PC1 GPIO_ACTIVE_HIGH>;
 };
 
 
@@ -648,6 +641,10 @@
 
 &video_phy1 {
 	status = "disabled";
+};
+
+&display_subsystem {
+	status = "okay";
 };
 
 &vop {
