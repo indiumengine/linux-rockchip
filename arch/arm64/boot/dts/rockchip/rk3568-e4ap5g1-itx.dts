@@ -35,6 +35,24 @@
 		regulator-max-microvolt = <3300000>;
 	};
 
+	vcc5v0_usb2: vcc5v0-usb-regulator {
+		compatible = "regulator-fixed";
+		enable-active-high;
+		gpio = <&gpio3 RK_PA0 GPIO_ACTIVE_HIGH>;
+		regulator-name = "vcc5v0_usb2";
+		regulator-min-microvolt = <5000000>;
+		regulator-max-microvolt = <5000000>;
+	};
+
+	vcc5v0_usb3: vcc5v0-usb-host-regulator {
+		compatible = "regulator-fixed";
+		enable-active-high;
+		gpio = <&gpio3 RK_PA1 GPIO_ACTIVE_HIGH>;
+		regulator-name = "vcc5v0_usb3";
+		regulator-min-microvolt = <5000000>;
+		regulator-max-microvolt = <5000000>;
+	};
+
 	leds {
 		compatible = "gpio-leds";
 		pinctrl-names = "default";
@@ -114,6 +132,70 @@
 	mali-supply = <&vdd_gpu>;
 	status = "okay";
 };
+
+&iep_mmu {
+	status = "okay";
+};
+
+&jpegd {
+	status = "okay";
+};
+
+&jpegd_mmu {
+	status = "okay";
+};
+
+&mpp_srv {
+	status = "okay";
+};
+
+&rk_rga {
+	status = "okay";
+};
+
+&rkvdec {
+	rockchip,disable-auto-freq;
+	assigned-clock-rates = <396000000>, <396000000>, <396000000>, <600000000>;
+	status = "okay";
+};
+
+&rkvdec_mmu {
+	status = "okay";
+};
+
+&rkvenc {
+	venc-supply = <&vdd_logic>;
+	status = "okay";
+};
+
+&rkvenc_mmu {
+	status = "okay";
+};
+
+&vdpu {
+	status = "okay";
+};
+
+&vdpu_mmu {
+	status = "okay";
+};
+
+&vepu {
+	status = "okay";
+};
+
+&vepu_mmu {
+	status = "okay";
+};
+
+&rng {
+	status = "okay";
+};
+
+&crypto {
+	status = "okay";
+};
+
 /*       hdmi display        */
 &hdmi {
    status = "okay";
@@ -356,11 +438,17 @@
 &i2c1 {
 	status = "okay";
 
-    rx8010: rx8010@32 {
+    rx8010_rtc: rx8010@32 {
         compatible = "epson,rx8010";
         reg = <0x32>;
         status = "okay";
     };
+
+	pcie_sw_sensor: lm75bd@48{
+		compatible = "nxp, lm75a";
+		reg = <0x48>;
+		status = "okay";
+	};
 };
 
 &i2c2 {
