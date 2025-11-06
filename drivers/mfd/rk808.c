@@ -940,6 +940,11 @@ static void rk8xx_device_shutdown(void)
 		reg = RK801_SYS_CFG2_REG;
 		bit = DEV_OFF;
 		break;
+	case RK809_ID:
+	case RK817_ID:
+		reg = RK817_SYS_CFG(3);
+		bit = DEV_OFF;
+		break;
 	case RK805_ID:
 		reg = RK805_DEV_CTRL_REG;
 		bit = DEV_OFF;
@@ -1431,6 +1436,7 @@ static int rk808_probe(struct i2c_client *client,
 		off_source = RK817_OFF_SOURCE_REG;
 		of_property_prepare_fn = rk817_of_property_prepare;
 		pinctrl_init = rk817_pinctrl_init;
+		device_shutdown_fn = rk8xx_device_shutdown;
 		break;
 	default:
 		dev_err(&client->dev, "Unsupported RK8XX ID %lu\n",
