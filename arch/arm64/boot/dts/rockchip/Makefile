@@ -28,7 +28,8 @@ dtb-$(CONFIG_ARCH_ROCKCHIP) += \
 	rk3568-nanopi5-rev03.dtb \
 	rk3568-nanopi5-rev04.dtb \
 	rk3568-nanopi5-rev05.dtb \
-	rk3568-nanopi5-rev07.dtb
+	rk3568-nanopi5-rev07.dtb \
+	rk3568-e4ap5g1-itx.dtb
 
 dtb-$(CONFIG_ARCH_ROCKCHIP) += \
 	rk3576-nanopi5-rev01.dtb \
@@ -264,6 +265,7 @@ dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3568-toybrick-sd0-android.dtb
 dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3568-toybrick-sd0-linux.dtb
 dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3568-toybrick-x0-android.dtb
 dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3568-toybrick-x0-linux.dtb
+dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3568-e4ap5g1-itx.dtb
 dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3568m-serdes-evb-camera-csi-v10.dtb
 dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3568m-serdes-evb-camera-dvp-v10.dtb
 dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3568m-serdes-evb-display-dsi0-command2dsi-lp4x-v10.dtb

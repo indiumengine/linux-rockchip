@@ -14,7 +14,7 @@
 #include "rk3568.dtsi"
 
 / {
-	model = "Indumengine E4AP5G1-ITX (RK3568) DDR3-ECC Board";
+	model = "IndiumEngine E4AP5G1-ITX (RK3568) DDR3-ECC Board";
 	compatible = "rockchip,rk3568-e4ap5g1-itx", "rockchip,rk3568";
 
 	aliases {
@@ -23,7 +23,7 @@
 	};
 
 	chosen: chosen {
-		stdout-path = "serial2:1500000n8";
+		stdout-path = "serial2:115200n8";
 	};
 
 	vcc3v3_sys: vcc3v3-sys-regulator {
@@ -39,6 +39,8 @@
 		compatible = "regulator-fixed";
 		enable-active-high;
 		gpio = <&gpio3 RK_PA0 GPIO_ACTIVE_HIGH>;
+		regulator-boot-on;
+		regulator-always-on;
 		regulator-name = "vcc5v0_usb2";
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
@@ -48,6 +50,8 @@
 		compatible = "regulator-fixed";
 		enable-active-high;
 		gpio = <&gpio3 RK_PA1 GPIO_ACTIVE_HIGH>;
+		regulator-boot-on;
+		regulator-always-on;
 		regulator-name = "vcc5v0_usb3";
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
@@ -131,6 +135,9 @@
 &gpu {
 	mali-supply = <&vdd_gpu>;
 	status = "okay";
+	/*增加2行以适配panfrost驱动*/
+	clock-names = "gpu", "bus";
+	interrupt-names = "gpu", "mmu", "job";
 };
 
 &iep_mmu {
@@ -282,6 +289,10 @@
 		vcc8-supply = <&vcc3v3_sys>;
 		vcc9-supply = <&vcc3v3_sys>;
 		wakeup-source;
+
+		rtc {
+			status = "disabled";
+		};
 
 		regulators {
 			vdd_logic: DCDC_REG1 {
@@ -438,14 +449,16 @@
 &i2c1 {
 	status = "okay";
 
-    rx8010_rtc: rx8010@32 {
-        compatible = "epson,rx8010";
+
+    sys_rtc: rx8025@32 {
+        compatible = "epson,rx8025t";
         reg = <0x32>;
         status = "okay";
     };
 
-	pcie_sw_sensor: lm75bd@48{
-		compatible = "nxp, lm75a";
+
+	pcie_sw_sensor: lm75b@48{
+		compatible = "national,lm75b";
 		reg = <0x48>;
 		status = "okay";
 	};
@@ -752,7 +765,7 @@
 				1 << ROCKCHIP_VOP2_CLUSTER0 | 1 << ROCKCHIP_VOP2_ESMART0 |
 				1 << ROCKCHIP_VOP2_CLUSTER1 | 1 << ROCKCHIP_VOP2_ESMART1 )>;
 	rockchip,primary-plane = <ROCKCHIP_VOP2_ESMART0>;
-	cursor-win-id = <ROCKCHIP_VOP2_ESMART1>;
+	//cursor-win-id = <ROCKCHIP_VOP2_ESMART1>; 使用panfrost驱动时不能有这一行
 };
 
 &vp1 {
