@@ -501,26 +501,6 @@
 
 &pinctrl {
 	
-	// PWM0 作为风扇调速输出
-    pwm0 {
-        pwm0_pin: pwm0-pin {
-            rockchip,pins = <0 RK_PB5 1 &pcfg_pull_none>;
-        };
-    };
-
-    // PWM1 作为风扇转速输入
-    pwm1 {
-        pwm1_pin: pwm1-pin {
-            rockchip,pins = <0 RK_PB6 0 &pcfg_pull_none>;
-        };
-    };
-
-    // PWM2 作为蜂鸣器输出
-    pwm2 {
-        pwm2_pin: pwm2-pin {
-            rockchip,pins = <0 RK_PB7 1 &pcfg_pull_none>;
-        };
-    };
 	
 
     i2c2 {
@@ -579,29 +559,19 @@
 	vccio7-supply = <&vcc_3v3>;
 	status = "okay";
 };
-/*
+
 &pwm0 {
     status = "okay";
-    pinctrl-names = "default";
-    pinctrl-0 = <&pwm0_pin>;
-    duty-cycle = <50>;
 };
 
 &pwm1 {
     status = "okay";
-    pinctrl-names = "default";
-    pinctrl-0 = <&pwm1_pin>;
-    // 配置为 GPIO 输入模式（用于测速）
-    rockchip,pwm-mode = <0>; // 0=GPIO, 1=PWM
 };
 
 &pwm2 {
     status = "okay";
-    pinctrl-names = "default";
-    pinctrl-0 = <&pwm2_pin>;
-    duty-cycle = <0>;
 };
-*/
+
 &saradc {
 	vref-supply = <&vcca_1v8>;
 	status = "okay";
